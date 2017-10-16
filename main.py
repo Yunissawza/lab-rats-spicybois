@@ -25,6 +25,11 @@ kitchen.cabinet = Container("cabinet under the sink",["knife","twinkie"])
 kitchen.create_room_item("spoon")
 kitchen.create_room_item("rat")
 
+#Ammo
+#
+Ammo = Room("Ammo Room","A dark room with 2 containers on a shelf. You can open the  container CONTAINER." "You can go back into the kitchen KITCHEN.")
+Ammo.container = Container("container",["ammo"])
+
 # Small Office
 #
 smalloffice = Room("Small Office","A dark room with a mess of books and papers covering the desk. There is some mail and an ozon.ru PACKAGE. You can READ a book. You can look in the DESK.")
@@ -35,7 +40,7 @@ redFlashlight = Flashlight("red",0,False)
 
 # Laboratory
 #
-lab = Room("Laboratory","A bright room with sunlight shining through windows secured by prison bars. There is a messy SHELF on the north wall.")
+lab = Room("Laboratory ","A bright room with sunlight shining through windows secured by prison bars. There is a messy SHELF on the north wall.")
 # The lab has a SHELF object that contains 3 interactive items. Shelf gets a third argument because you'd say ON the shelf, not IN the shelf
 lab.shelf = Container("shelf",["brass key","spork","yellow flashlight"],"on")
 lab.create_room_item("rat")
@@ -52,7 +57,7 @@ locked = Room("locked","")
 # Connect rooms. These are one-way connections.
 kitchen.link_room(locked, "EAST")
 kitchen.link_room(smalloffice, "SOUTH")
-kitchen.link_room(locked, "WEST")
+kitchen.link_room(Ammo, "WEST")
 supplycloset.link_room(smalloffice, "EAST")
 smalloffice.link_room(kitchen, "NORTH")
 smalloffice.link_room(lab, "EAST")
@@ -61,6 +66,7 @@ smalloffice.link_room(supplycloset, "WEST")
 lab.link_room(locked, "SOUTH")
 lab.link_room(smalloffice, "WEST")
 current_room = kitchen
+Ammo.link_room(kitchen, "EAST") 
 
 # Set up characters
 dmitry = Enemy("Dmitry", "A smelly zombie")
